@@ -13,6 +13,7 @@ class BaseController
 {
 	protected $template;
 	protected $app;
+	protected $pageTitle;
 
 	function __construct()
 	{
@@ -63,5 +64,15 @@ class BaseController
 			//Вызов шаблона
          	require $this->template;
         }
+	}
+
+	public function setTitle($title)
+	{
+		$this->pageTitle = $title;
+	}
+
+	public function getTitle()
+	{
+		return $this->pageTitle;
 	}
 }

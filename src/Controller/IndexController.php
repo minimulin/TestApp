@@ -13,6 +13,7 @@ class IndexController extends BaseController
     public function actionIndex()
     {
         $this->setTemplate('index.tpl');
+        $this->setTitle('Главная страница');
 
         $data = [
             'example' => 'hello',
