@@ -5,7 +5,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<meta name="description" content="">
 	<meta name="author" content="Artur Minimulin">
 
 	<title><?=$this->getTitle();?></title>
@@ -34,9 +33,9 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="/">Главная</a></li>
-						<li><a href="/replies">Отзывы</a></li>
-						<li><a href="/about">О проекте</a></li>
+						<li <?=$request->getUri() == '/'?'class="active"':''?>><a href="/">Главная</a></li>
+						<li <?=$request->getUri() == '/replies'?'class="active"':''?>><a href="/replies">Отзывы</a></li>
+						<li <?=$request->getUri() == '/about'?'class="active"':''?>><a href="/about">О проекте</a></li>
 					</ul>
 				</div>
 			</div>

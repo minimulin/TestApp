@@ -15,16 +15,13 @@ class IndexController extends BaseController
         $this->setTemplate('index.tpl');
         $this->setTitle('Главная страница');
 
-        $data = [
-            'example' => 'hello',
-        ];
-
         return $data;
     }
 
     public function actionAbout()
     {
-        return 'О проекте';
+        $this->setTemplate('about.tpl');
+        $this->setTitle('О проекте');
     }
 
     public function action404()

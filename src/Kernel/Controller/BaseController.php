@@ -71,16 +71,28 @@ class BaseController
         }
 	}
 
+	/**
+	 * Устанавливает title страницы
+	 * @param string $title Title страницы
+	 */
 	public function setTitle($title)
 	{
 		$this->pageTitle = $title;
 	}
 
+	/**
+	 * Возвращает указанный title страницы
+	 * @return string Title страницы
+	 */
 	public function getTitle()
 	{
 		return $this->pageTitle;
 	}
 
+	/**
+	 * Контроллер по умолчанию для отработки 404 ошибки
+	 * @return String Ответ
+	 */
 	public function action404()
     {
         return 'Страница не найдена';
