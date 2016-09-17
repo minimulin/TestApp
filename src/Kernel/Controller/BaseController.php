@@ -61,8 +61,13 @@ class BaseController
 			$app = $this->app;
 			$request = $app->getRequest();
 
-			//Вызов шаблона
-         	require $this->template;
+			if (isset($this->template)) {
+				//Вызов шаблона
+	         	require $this->template;
+			} else {
+				//Если шаблон не указан, то просто выводим текст, сгенерированный контроллером
+				echo $data;
+			}
         }
 	}
 
@@ -75,4 +80,9 @@ class BaseController
 	{
 		return $this->pageTitle;
 	}
+
+	public function action404()
+    {
+        return 'Страница не найдена';
+    }
 }

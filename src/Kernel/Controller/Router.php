@@ -36,14 +36,17 @@ class Router
     {
         $url = Request::getUri();
         $routes = array_keys($this->routeMapping);
+        $routeMatch = false;
 
         foreach ($routes as $key => $route) {
             if (preg_match($route, $url)) {
+                $routeMatch = $key;
                 break;
             }
         }
 
-        $controller = $this->routeMapping[$routes[$key]];
+        $controller = $this->routeMapping[$routes[$routeMatch]];
+
         return split('@', $controller);
     }
 

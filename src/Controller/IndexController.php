@@ -24,7 +24,13 @@ class IndexController extends BaseController
 
     public function actionAbout()
     {
-        die(var_dump('About page'));
+        return 'О проекте';
+    }
+
+    public function action404()
+    {
+        $this->setTemplate('404.tpl');
+        $this->setTitle('Страница не найдена');
     }
 
 }

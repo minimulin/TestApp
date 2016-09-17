@@ -30,13 +30,13 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Тестовое задание</a>
+					<a class="navbar-brand" href="/">Тестовое задание</a>
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Главная</a></li>
-						<li><a href="#about">Отзывы</a></li>
-						<li><a href="#contact">Исполнитель</a></li>
+						<li class="active"><a href="/">Главная</a></li>
+						<li><a href="/replies">Отзывы</a></li>
+						<li><a href="/about">О проекте</a></li>
 					</ul>
 				</div>
 			</div>
