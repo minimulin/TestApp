@@ -2,6 +2,4 @@
 
 Example <?=$data['example']?>
 
-<?php hello(); ?>
-
 <?php include 'footer.tpl' ?>
