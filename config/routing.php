@@ -12,7 +12,7 @@ return [
 	//О проекте
 	'!^\/about!' => '\\TestApp\\Controller\\IndexController@about',
 	//Отзывы
-	'!^\/replies!' => '\\TestApp\\Controller\\IndexController@replies',
+	'!^\/replies!' => '\\TestApp\\Controller\\ReplyController@index',
 	//404
 	'!^.*$!' => '\\TestApp\\Controller\\IndexController@404',
 ];

@@ -3,6 +3,7 @@
 namespace TestApp\Kernel;
 
 use TestApp\Kernel\Controller\Request;
+use TestApp\Kernel\Database\Connection;
 
 /**
  * Основной класс приложения
@@ -17,6 +18,8 @@ class App
 
     //Конфигурационный массив
     protected static $config;
+
+    protected static $database;
 
     protected function __clone()
     {
@@ -45,6 +48,8 @@ class App
     public function run()
     {
         self::$config = ConfigReader::read('config/app.php');
+
+        self::$database = Connection::getInstance();
 
         //Всё работает через класс запроса
         self::$request = Request::getInstance();
