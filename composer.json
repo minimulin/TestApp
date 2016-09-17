@@ -1,0 +1,22 @@
+{
+    "name": "mrstiher/testapp",
+    "description": "Тестовое задание",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arthur Heisenberg",
+            "email": "artur@heisenberg.su"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "TestApp\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    }
+}
