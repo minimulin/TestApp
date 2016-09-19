@@ -3,6 +3,7 @@
 namespace TestApp\Kernel\Database;
 
 use TestApp\Kernel\App;
+use \DateTime;
 use \PDO;
 
 /**
@@ -51,14 +52,23 @@ class Connection
         $user = self::$databaseConfig['user'];
         $password = self::$databaseConfig['pass'];
 
-        $connection = new PDO($dsn, $user, $password);
+        $connection = new PDO($dsn, $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
+
+        $now = new DateTime();
+        $mins = $now->getOffset() / 60;
+        $sgn = ($mins < 0 ? -1 : 1);
+        $mins = abs($mins);
+        $hrs = floor($mins / 60);
+        $mins -= $hrs * 60;
+        $offset = sprintf('%+d:%02d', $hrs * $sgn, $mins);
+        $connection->exec("SET time_zone='$offset';");
 
         return $connection;
     }
 
     public function prepare($query)
     {
-    	return self::$pdoConnection->prepare($query);
+        return self::$pdoConnection->prepare($query);
     }
 
 }

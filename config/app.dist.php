@@ -5,10 +5,11 @@
  */
 return [
 	'tplPath' => 'tpls',
+	'uploadPath' => 'public/upload',
 	'database' => [
 		'user' => '###',
 		'pass' => '###',
 		'database' => '###',
-		'host' => 'localhost',
+		'host' => '###',
 	],
 ];

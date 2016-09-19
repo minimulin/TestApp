@@ -1,29 +1,25 @@
-<div class="timeline-comment-wrapper js-comment-container">
-	<span class="timeline-comment-avatar"><i class="fa fa-user" aria-hidden="true"></i></span>
+<div class="row">
+	<div class="col-md-1">
+		<div class="thumbnail">
+			<img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+		</div><!-- /thumbnail -->
+	</div><!-- /col-md-1 -->
 
-
-	<div id="issue-155665676" class="comment previewable-edit timeline-comment js-comment js-task-list-container js-reorderable-task-lists reorderable-task-lists">
-
-		<div class="timeline-comment-header ">
-
-			<div class="timeline-comment-header-text">
-				<strong>
-					<a href="/HeikoAdams" class="author"><?=$reply['name']?></a> 
-				</strong>
-
-				оставил отзыв
-
-				<span class="timestamp">
-					9 часов назад
-				</span>
-
+	<div class="col-md-11">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong><?=$reply['name']?></strong> (<?=$reply['email']?>) <span class="text-muted">оставил отзыв <span title="<?=$reply['created_at']?>"><?=timeAgo($reply['created_at'])?></span></span>
 			</div>
-		</div>
+			<div class="panel-body">
+				<?=$reply['message']?>
 
-		<div class="edit-comment-hide">
-			<div class="comment-body markdown-body markdown-format js-comment-body">
-				<p><?=$reply['message']?></p>
-			</div>
-		</div>
-	</div>
-</div>
+				<?php if($reply['image']): ?>
+					<hr>
+					<div class="text-center">
+						<img src="<?=$reply['image']?>">
+					</div>
+				<?php endif; ?>
+			</div><!-- /panel-body -->
+		</div><!-- /panel panel-default -->
+	</div><!-- /col-md-5 -->
+</div><!-- /row -->

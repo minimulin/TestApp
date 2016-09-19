@@ -17,6 +17,9 @@ class Request
     //Массив POST-параметров
     protected static $post;
 
+    //Массив переданных файлов
+    protected static $files;
+
     //Массив всех параметров
     protected static $params;
 
@@ -49,6 +52,7 @@ class Request
             self::$uri = explode('?', $_SERVER['REQUEST_URI'], 2)[0];
             self::$get = $_GET;
             self::$post = $_POST;
+            self::$files = $_FILES;
             self::$params = $_REQUEST;
             self::$domain = $_SERVER['SERVER_NAME'];
             self::$router = new Router();
@@ -61,7 +65,7 @@ class Request
      * Возвращает URI
      * @return string URI
      */
-    public function getUri()
+    public static function getUri()
     {
         return self::$uri;
     }
@@ -69,7 +73,7 @@ class Request
     /**
      * Обрабатывает запрос
      */
-    public function handleRequest()
+    public static function handleRequest()
     {
         self::$router->handle();
     }
@@ -78,7 +82,7 @@ class Request
      * Возвращает домен, на котором всё работает
      * @return string Домен
      */
-    public function getDomain()
+    public static function getDomain()
     {
         return self::$domain;
     }
@@ -88,7 +92,7 @@ class Request
      * @param  string $param Параметр
      * @return mixed GET-параметр
      */
-    public function get($param = null)
+    public static function get($param = null)
     {
         if (!is_null($param)) {
             return self::$get[$param];
@@ -102,10 +106,10 @@ class Request
      * @param  string $param Параметр
      * @return mixed Параметр
      */
-    public function all($param = null)
+    public static function all($param = null)
     {
         if (!is_null($param)) {
-            return self::$params;[$param];
+            return self::$params[$param];
         }
 
         return self::$params;
@@ -116,13 +120,50 @@ class Request
      * @param  string $param Параметр
      * @return mixed POST-параметр
      */
-    public function post($param)
+    public static function post($param)
     {
         if (!is_null($param)) {
             return self::$post[$param];
         }
 
         return self::$post;
+    }
+
+    public static function isAjax()
+    {
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isPost()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function getFile($key)
+    {
+        if (!is_null($key)) {
+            return self::$files[$key];
+        }
+
+        return self::$files;
+    }
+
+    public static function setHttpCode($code)
+    {
+        http_response_code($code);
+    }
+
+    public function redirect($url)
+    {
+        header("Location: $url");
     }
 
 }

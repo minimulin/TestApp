@@ -37,6 +37,7 @@ class App
     {
         if (is_null(self::$instance)) {
             self::$instance = new self;
+            session_start();
         }
 
         return self::$instance;
@@ -68,7 +69,40 @@ class App
         }
 
         return self::$config;
+    }
 
+    /**
+     * Возвращает сессионные данные
+     * @param   string $key Искомый ключ
+     * @return mixed        Значение
+     */
+    public static function getSession($key = null)
+    {
+        if ($key) {
+            return $_SESSION[$key];
+        }
+
+        return self::$config;
+    }
+
+    /**
+     * Сохраняет сессионные данные
+     * @param   string $key Ключ
+     * @param   mixed $data Данные
+     */
+    public static function setSession($key, $data)
+    {
+        $_SESSION[$key] = $data;
+    }
+
+    /**
+     * Очищает сессионные данные
+     * @param  string $key Искомый ключ
+     * @return mixed        Значение
+     */
+    public static function clearSession()
+    {
+        $_SESSION = [];
     }
 
     /**
@@ -77,15 +111,20 @@ class App
      */
     public static function getRoot()
     {
-        return $_SERVER['DOCUMENT_ROOT'] . '/../';
+        return realpath($_SERVER['DOCUMENT_ROOT'] . '/../');
     }
 
     /**
      * Возвращает экземпляр запроса
      * @return TestApp\Kernel\Controller\Request Запрос
      */
-    public function getRequest()
+    public static function getRequest()
     {
         return self::$request;
+    }
+
+    public static function isAdmin()
+    {
+        return (bool) self::getSession('isAdmin');
     }
 }

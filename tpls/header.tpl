@@ -12,6 +12,7 @@
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 	<link href="/css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -37,6 +38,13 @@
 						<li <?=$request->getUri() == '/'?'class="active"':''?>><a href="/">Главная</a></li>
 						<li <?=$request->getUri() == '/replies'?'class="active"':''?>><a href="/replies">Отзывы</a></li>
 						<li <?=$request->getUri() == '/about'?'class="active"':''?>><a href="/about">О проекте</a></li>
+					</ul>
+					<ul class="nav navbar-nav pull-right">
+						<?php if(!$app::isAdmin()): ?>
+							<li <?=$request->getUri() == '/login'?'class="active"':''?>><a href="/login">Авторизация</a></li>
+						<?php else: ?>
+							<li><a href="/login?action=logout">Выход</a></li>
+						<?php endif; ?>
 					</ul>
 				</div>
 			</div>

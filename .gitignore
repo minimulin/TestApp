@@ -1,4 +1,5 @@
 /public/dayside/
+/public/upload/
 /vendor
 composer.lock
 /config/app.php

@@ -4,14 +4,13 @@ namespace TestApp\Kernel\Controller;
 
 use TestApp\Kernel\ConfigReader;
 use TestApp\Kernel\Controller\Request;
-use \Exception;
 
 /**
  * Класс для обработки роутов
  */
 class Router
 {
-	//Массив роутов
+    //Массив роутов
     protected $routeMapping;
 
     public function __construct()

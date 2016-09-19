@@ -19,6 +19,12 @@ class BaseController
         $this->app = App::getInstance();
     }
 
+    public static function getFullTemplatePath($template)
+    {
+        $tplPath = App::getRoot() . '/' . App::getConfig('tplPath');
+        return $tplPath . '/' . $template;
+    }
+
     /**
      * Выполняет установку шаблона для вывода
      * @param string $template Шаблон
@@ -26,8 +32,7 @@ class BaseController
      */
     public function setTemplate($template)
     {
-        $tplPath = App::getRoot() . App::getConfig('tplPath');
-        $fullTemplatePath = $tplPath . '/' . $template;
+        $fullTemplatePath = self::getFullTemplatePath($template);
 
         if (file_exists($fullTemplatePath)) {
             $this->template = $fullTemplatePath;
@@ -43,6 +48,25 @@ class BaseController
     public function getTemplate()
     {
         return $this->template;
+    }
+
+    public function getView($template, $data)
+    {
+        $fullTemplatePath = self::getFullTemplatePath($template);
+
+        if (file_exists($fullTemplatePath)) {
+            if (is_array($data)) {
+                foreach ($data as $key => $value) {
+                    $$key = $value;
+                }
+            }
+
+            ob_start();
+            require $fullTemplatePath;
+            return ob_get_clean();
+        } else {
+            throw new Exception('Шаблон ' . $template . ' не найден', 1);
+        }
     }
 
     /**
