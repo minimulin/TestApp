@@ -23,11 +23,6 @@
 		<?php include 'replyElement_admin.tpl' ?>
 	<?php endforeach;?>
 
-	<!-- Button trigger modal -->
-	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-		Launch demo modal
-	</button>
-
 	<!-- Modal -->
 	<div class="modal fade" id="replyEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">

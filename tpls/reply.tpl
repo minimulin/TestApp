@@ -70,7 +70,7 @@
 					</div>
 				</form>
 
-				<div id="previewContainer">
+				<div id="previewContainer" style="display: none;">
 					<h3>Предварительный просмотр</h3>
 
 					<div class="previewHtml">

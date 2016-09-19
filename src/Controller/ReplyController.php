@@ -14,6 +14,9 @@ use TestApp\Model\Reply;
 class ReplyController extends BaseController
 {
 
+    /**
+     * Список отзывов
+     */
     public function actionIndex()
     {
         if (App::isAdmin()) {
@@ -43,6 +46,9 @@ class ReplyController extends BaseController
         return $replies;
     }
 
+    /**
+     * Добавление отзыва
+     */
     public function actionReplyAdd()
     {
         $response = [
@@ -76,6 +82,10 @@ class ReplyController extends BaseController
         $this->redirect404();
     }
 
+    /**
+     * Обработчик загрузки изображения
+     * @param  boolean $output Вернуть содержимое файла вместо физического сохранения
+     */
     public function handleFileUpload($output = false)
     {
         $uploadPath = App::getRoot() . '/' . App::getConfig('uploadPath');
@@ -83,19 +93,19 @@ class ReplyController extends BaseController
         if ($file['error'] == UPLOAD_ERR_OK) {
             $extension = pathinfo($file["name"], PATHINFO_EXTENSION);
             $newFileName = md5(time() . $file["name"]) . '.' . $extension;
-
             $fullNewPath = $uploadPath . '/' . $newFileName;
 
             $image = new ImageResizer();
             $image->load($file["tmp_name"]);
             $image->resizeWithRatio(320, 240);
+
+            //Для того, чтобы не сохранять лишний раз изображение, просто выводим его как base64 в src
             if ($output) {
                 ob_start();
                 $image->output();
                 $src = ob_get_contents();
                 ob_end_clean();
                 return 'data:image/png;base64,' . base64_encode($src);
-
             } else {
                 $image->save($fullNewPath);
             }
@@ -106,6 +116,9 @@ class ReplyController extends BaseController
         }
     }
 
+    /**
+     * Редирект на 404
+     */
     public function redirect404()
     {
         $this->setTemplate('404.tpl');
@@ -113,6 +126,9 @@ class ReplyController extends BaseController
         Request::setHttpCode(404);
     }
 
+    /**
+     * Смена сортировки списка отзывов
+     */
     public function actionChangeSort()
     {
         $response = [
@@ -138,6 +154,9 @@ class ReplyController extends BaseController
         $this->redirect404();
     }
 
+    /**
+     * Получение предпросмотра отзыва
+     */
     public function actionPreview()
     {
         $response = [
@@ -167,13 +186,16 @@ class ReplyController extends BaseController
         $this->redirect404();
     }
 
+    /**
+     * Получение формы редактирования отзыва
+     */
     public function actionGetData()
     {
         $response = [
             'result' => 'success',
         ];
 
-        if (Request::isAjax() && Request::isPost()) {
+        if (Request::isAjax() && Request::isPost() && App::isAdmin()) {
             $id = App::getRequest()->post('id');
 
             $reply = Reply::findById($id);
@@ -194,13 +216,16 @@ class ReplyController extends BaseController
         $this->redirect404();
     }
 
+    /**
+     * Обработчик формы редактирования отзыва
+     */
     public function actionUpdate()
     {
         $response = [
             'result' => 'success',
         ];
 
-        if (Request::isAjax() && Request::isPost()) {
+        if (Request::isAjax() && Request::isPost() && App::isAdmin()) {
             $replyData = App::getRequest()->all();
 
             $validationResult = Reply::validate($replyData);
@@ -224,13 +249,16 @@ class ReplyController extends BaseController
         $this->redirect404();
     }
 
+    /**
+     * Обработчик смены статуса отзыва
+     */
     public function actionChangeStatus()
     {
         $response = [
             'result' => 'success',
         ];
 
-        if (Request::isAjax() && Request::isPost()) {
+        if (Request::isAjax() && Request::isPost() && App::isAdmin()) {
             $replyId = App::getRequest()->all('id');
             $replyStatus = App::getRequest()->all('status');
             if ($replyStatus == 'apply') {

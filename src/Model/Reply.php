@@ -2,13 +2,12 @@
 
 namespace TestApp\Model;
 
-use TestApp\Kernel\Database\AbstractModel;
 use TestApp\Kernel\Database\Connection;
 
 /**
  * Модель для работы с отзывами
  */
-class Reply extends AbstractModel
+class Reply
 {
 
     protected static $rules = [

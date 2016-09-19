@@ -33,6 +33,9 @@ class IndexController extends BaseController
         Request::setHttpCode(404);
     }
 
+    /**
+     * Авторизация
+     */
     public function actionLogin()
     {
         $this->setTemplate('login.tpl');
